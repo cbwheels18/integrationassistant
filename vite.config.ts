@@ -105,8 +105,10 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
   const localApiBaseUrl = env.INTEGRATION_API_LOCAL_URL || 'http://127.0.0.1:8000'
   const fallbackApiUrl = env.INTEGRATION_API_FALLBACK_URL
+  const base = env.VITE_BASE_PATH || (mode === 'production' ? '/integrationassistant/' : '/')
 
   return {
+    base,
     plugins: [react(), integrationApiFallbackPlugin(localApiBaseUrl, fallbackApiUrl)],
   }
 })

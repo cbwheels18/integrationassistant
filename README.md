@@ -20,6 +20,31 @@ INTEGRATION_API_FALLBACK_URL=https://script.google.com/macros/s/YOUR_DEPLOYMENT_
 Do not use a `VITE_` prefix for the Apps Script URL. `.env.local` is ignored by
 git, and variables without `VITE_` are only used by the Vite dev server.
 
+## GitHub Pages deployment
+
+GitHub Pages serves the production build from:
+
+```txt
+https://cbwheels18.github.io/integrationassistant/
+```
+
+The GitHub Actions workflow in `.github/workflows/deploy.yml` builds `dist` and
+deploys it to Pages automatically when `main` is pushed.
+
+Before the first deploy, open the GitHub repo and set:
+
+1. `Settings -> Pages -> Build and deployment -> Source -> GitHub Actions`
+2. `Settings -> Secrets and variables -> Actions -> New repository secret`
+3. Name: `VITE_INTEGRATION_API_ENDPOINT`
+4. Value: your Apps Script URL with the integration route, for example:
+
+```env
+https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec?route=/api/integrationassistant
+```
+
+This URL is included in the browser build so the static GitHub Pages app can
+submit the form. Do not put private credentials in `VITE_` variables.
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:

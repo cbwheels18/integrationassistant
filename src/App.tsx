@@ -7,7 +7,8 @@ import {
 import type { Field, IntakeData, Step } from './integrationFlow'
 import type { FormEvent } from 'react'
 
-const API_ENDPOINT = '/api/integrationassistant'
+const API_ENDPOINT =
+  import.meta.env.VITE_INTEGRATION_API_ENDPOINT || '/api/integrationassistant'
 
 function getVisibleSteps(data: IntakeData) {
   return integrationSteps.filter((step) => !step.includeWhen || step.includeWhen(data))
